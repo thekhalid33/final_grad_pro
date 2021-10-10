@@ -1,3 +1,4 @@
+import 'package:admin_grad_pro/utils/Colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -15,7 +16,7 @@ class CustomButton extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: RaisedButton(
-        color: Colors.greenAccent,
+        color: primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         onPressed: () {
           function();

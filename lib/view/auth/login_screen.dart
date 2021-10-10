@@ -15,6 +15,8 @@ class LoginScreen extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
+            SizedBox(height: 20,),
             CustomTextField('Email', controller.emailController),
             CustomTextField('Password', controller.passwordController),
             CustomButton(function: controller.login, label: 'Login'),
@@ -22,13 +24,16 @@ class LoginScreen extends StatelessWidget {
               onTap: () {
                 Get.to(ResetPasswordScreen());
               },
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Forget Password?',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(color: Colors.blue),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Forget Password?',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ),
             ),

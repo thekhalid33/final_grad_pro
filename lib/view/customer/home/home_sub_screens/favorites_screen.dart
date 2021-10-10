@@ -43,7 +43,7 @@ class FavoritesScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   CustomText(
-                    text: 'Cart is empty',
+                    text: 'Favorites is empty',
                     fontSize: 32,
                     alignment: Alignment.topCenter,
                   ),

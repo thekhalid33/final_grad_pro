@@ -24,20 +24,24 @@ class _OrderMainScreenState extends State<OrderMainScreen>
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text('Orders'),
+          title: Text('Orders',style: TextStyle( color: Colors.white),),
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Get.find<ZoomController>().drawerController.toggle();
             },
-            icon: Icon(Icons.menu),
+            icon: Icon(Icons.menu,color: Colors.white,),
           ),
-          bottom: TabBar(controller: _tabController, tabs: [
+          bottom: TabBar(
+              labelColor:  Colors.white,
+              controller: _tabController, tabs: [
             Tab(
               text: 'New Orders',
+
+
             ),
             Tab(
-              text: 'Done Orders',
+              text:       'Done Orders',
             )
           ]),
         ),

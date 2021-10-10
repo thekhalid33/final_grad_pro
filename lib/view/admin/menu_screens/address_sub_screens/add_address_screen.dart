@@ -10,13 +10,13 @@ class AddAddressScreen extends StatelessWidget {
       init: Get.find<AuthViewModel>(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          title: Text('Add Category'),
+          title: Text('Add Address',style: TextStyle(color: Colors.white),),
           leading: IconButton(
             onPressed: () {
               controller.resetAddressControllers();
               Get.back();
             },
-            icon: Icon(Icons.arrow_back_ios, size: 30),
+            icon: Icon(Icons.arrow_back_ios, size: 30,color: Colors.white,),
           ),
           actions: [
             IconButton(
@@ -26,6 +26,7 @@ class AddAddressScreen extends StatelessWidget {
               icon: Icon(
                 Icons.check,
                 size: 30,
+                color: Colors.white,
               ),
             ),
           ],

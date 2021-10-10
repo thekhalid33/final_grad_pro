@@ -306,7 +306,7 @@ class AuthViewModel extends GetxController {
     if (isLoggedIn) {
       this.myId = AuthHelper.authHelper.getUserId();
       //TODO: 2 add osama
-      if (this.myId == 'z8UktWh4KSTrhh5LbNojma9LFIp2') {
+      if (this.myId == 'z8UktWh4KSTrhh5LbNojma9LFIp2' || this.myId == 'tysJdb582iYpIpbQz6drBNWsyp33' ){
         Get.offAll(() => FlutterZoomDrawer());
       } else {
         Get.offAll(() => ControlView());

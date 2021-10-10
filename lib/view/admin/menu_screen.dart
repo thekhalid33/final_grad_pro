@@ -1,5 +1,6 @@
 import 'package:admin_grad_pro/lviewmodels/auth_view_model.dart';
 import 'package:admin_grad_pro/lviewmodels/zoom_controller.dart';
+import 'package:admin_grad_pro/utils/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,7 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF464dfe),
+      backgroundColor: primaryColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -61,10 +62,10 @@ final List<Widget> menuItems = [
         children: <Widget>[
           Icon(
             Icons.person_outline,
-            color: Colors.black,
+            color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Account'),
+          Text('Home',style: TextStyle(color: Colors.white),),
         ],
       ),
     ),
@@ -84,10 +85,10 @@ final List<Widget> menuItems = [
         children: <Widget>[
           Icon(
             Icons.edit_sharp,
-            color: Colors.black,
+            color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Products Management'),
+          Text('Products Management',style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -107,10 +108,10 @@ final List<Widget> menuItems = [
         children: <Widget>[
           Icon(
             Icons.format_list_bulleted,
-            color: Colors.black,
+            color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Orders Management'),
+          Text('Orders Management',style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -130,10 +131,10 @@ final List<Widget> menuItems = [
         children: <Widget>[
           Icon(
             Icons.location_city,
-            color: Colors.black,
+            color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Address Management'),
+          Text('Address Management',style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -153,10 +154,10 @@ final List<Widget> menuItems = [
         children: <Widget>[
           Icon(
             Icons.category,
-            color: Colors.black,
+            color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Categories Management'),
+          Text('Categories Management',style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -174,16 +175,13 @@ final List<Widget> menuItems = [
       },
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.person,
-            color: Colors.black,
-          ),
+
           Icon(
             Icons.settings,
-            color: Colors.black,
+            color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Customers Management'),
+          Text('Customers Management',style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -203,10 +201,10 @@ final List<Widget> menuItems = [
         children: <Widget>[
           Icon(
             Icons.logout,
-            color: Colors.black,
+            color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Logout'),
+          Text('Logout',style: TextStyle(color: Colors.white)),
         ],
       ),
     ),

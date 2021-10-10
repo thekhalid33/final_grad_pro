@@ -13,12 +13,12 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('home'),
+        title: Text('Home',style: TextStyle(color: Colors.white)),
         leading: IconButton(
           onPressed: () {
             Get.find<ZoomController>().drawerController.toggle();
           },
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.menu,color: Colors.white,),
         ),
       ),
       body: ControlView(),

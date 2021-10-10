@@ -41,19 +41,29 @@ class AddProductScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+
+              SizedBox(height: 20,),
               GestureDetector(
                 onTap: () {
                   controller.selectFile();
                 },
                 child: Container(
+                  
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                    borderRadius: BorderRadius.circular(100)
+                  ),
+                  
+                  
                   height: 200,
                   width: 200,
-                  color: Colors.grey,
+
                   child: controller.file == null
                       ? Container()
                       : Image.file(controller.file, fit: BoxFit.cover),
                 ),
               ),
+              SizedBox(height: 10,),
               CustomTextField('name', controller.nameController),
               CustomTextField('description', controller.descriptionController),
               CustomTextField('color', controller.colorController),

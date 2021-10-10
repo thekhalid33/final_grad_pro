@@ -18,14 +18,15 @@ class ProductsManagementScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Products Management',
-          style: TextStyle(fontSize: 17),
+          style: TextStyle(fontSize: 17,color:  Colors.white,
+          ),
         ),
         leading: IconButton(
           onPressed: () {
             Get.find<ZoomController>().drawerController.toggle();
             Get.find<AdminProductViewModel>().resetControllers();
           },
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.menu,color: Colors.white,),
         ),
         actions: [
           IconButton(
@@ -35,6 +36,7 @@ class ProductsManagementScreen extends StatelessWidget {
             icon: Icon(
               Icons.add,
               size: 30,
+              color: Colors.white,
             ),
           ),
         ],

@@ -19,20 +19,21 @@ class CategoriesManagement extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             'Categories Management',
-            style: TextStyle(fontSize: 17),
+            style: TextStyle(fontSize: 17,color: Colors.white),
+
           ),
           leading: IconButton(
             onPressed: () {
               Get.find<ZoomController>().drawerController.toggle();
             },
-            icon: Icon(Icons.menu),
+            icon: Icon(Icons.menu, color: Colors.white,),
           ),
           actions: [
             IconButton(
               onPressed: () {
                 Get.to(() => AddCategoryScreen());
               },
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.add,color: Colors.white,),
             ),
           ],
         ),

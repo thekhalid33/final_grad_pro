@@ -23,7 +23,7 @@ class _AuthMainScreenState extends State<AuthMainScreen>
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text('Main Page'),
+          title: Text('Account'),
           bottom: TabBar(
               controller: Get.find<AuthViewModel>().tabController,
               tabs: [

@@ -33,7 +33,7 @@ class ProductModel {
       name: map['name'],
       image: map['image'],
       description: map['description'],
-      color: HexColor.fromHex(map['colorString']),
+      // color: HexColor.fromHex(map['colorString']),
       size: map['size'],
       price: map['price'],
       brand: map['brand'],

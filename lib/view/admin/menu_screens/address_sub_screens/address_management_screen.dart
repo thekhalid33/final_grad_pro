@@ -16,7 +16,7 @@ class AddressManagementScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             'Address Management',
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18,color: Colors.white),
           ),
           leading: IconButton(
             onPressed: () {
@@ -25,6 +25,7 @@ class AddressManagementScreen extends StatelessWidget {
             icon: Icon(
               Icons.menu,
               size: 30,
+              color: Colors.white,
             ),
           ),
           actions: [
@@ -35,6 +36,7 @@ class AddressManagementScreen extends StatelessWidget {
               icon: Icon(
                 Icons.add,
                 size: 30,
+                color: Colors.white,
               ),
             ),
           ],

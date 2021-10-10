@@ -15,19 +15,30 @@ class RegisterScreen extends StatelessWidget {
         return SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 30,),
               GestureDetector(
                 onTap: () {
                   controller.selectFile();
                 },
                 child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                    borderRadius: BorderRadius.circular(100)
+                  ),
                   height: 200,
                   width: 200,
-                  color: Colors.grey,
-                  child: controller.file == null
-                      ? Container()
-                      : Image.file(controller.file, fit: BoxFit.cover),
+
+                  child: controller.file == null ? Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(100)
+                    ),
+                    height: 200,
+                    width: 200,
+                    child: Image(image: AssetImage("assets/images/Userimage.png"),),) : Image.file(controller.file, fit: BoxFit.cover),
                 ),
               ),
+              SizedBox(height: 30,),
               CustomTextField('FirstName', controller.firstNameController),
               CustomTextField('LastName', controller.lastNameController),
               CustomTextField('Email', controller.emailController),

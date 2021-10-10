@@ -1,4 +1,5 @@
 import 'package:admin_grad_pro/splach_screen.dart';
+import 'package:admin_grad_pro/utils/Colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -14,7 +15,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: primaryColor,
+
+        primarySwatch: Colors.green,
       ),
       home: FirebaseConfiguration(),
     );
@@ -29,6 +32,8 @@ class FirebaseConfiguration extends StatelessWidget {
         builder: (context, AsyncSnapshot<FirebaseApp> dataSnapShot) {
           if (dataSnapShot.hasError) {
             return Scaffold(
+
+
               backgroundColor: Colors.red,
               body: Center(
                 child: Text(dataSnapShot.error.toString()),

@@ -10,12 +10,12 @@ class CustomersManagement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customers Management'),
+        title: Text('Customers Management',style: TextStyle(color: Colors.white),),
         leading: IconButton(
           onPressed: () {
             Get.find<ZoomController>().drawerController.toggle();
           },
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.menu,color: Colors.white,),
         ),
       ),
       body: GetBuilder<AdminCustomersViewModel>(
