@@ -38,78 +38,101 @@ class AddProductScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-
-              SizedBox(height: 20,),
-              GestureDetector(
-                onTap: () {
-                  controller.selectFile();
-                },
-                child: Container(
-                  
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                    borderRadius: BorderRadius.circular(100)
-                  ),
-                  
-                  
-                  height: 200,
-                  width: 200,
-
-                  child: controller.file == null
-                      ? Container()
-                      : Image.file(controller.file, fit: BoxFit.cover),
-                ),
-              ),
-              SizedBox(height: 10,),
-              CustomTextField('name', controller.nameController),
-              CustomTextField('description', controller.descriptionController),
-              CustomTextField('color', controller.colorController),
-              CustomTextField('size', controller.sizeController),
-              CustomTextField('price', controller.priceController),
-              CustomTextField('brand', controller.brandController),
-              GetBuilder<HomeViewModel>(
-                init: _homeViewModel,
-                builder: (homeController) => homeController.categoryModels ==
-                        null
-                    ? Container()
-                    : Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        body: controller.loading.value
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.selectFile();
+                      },
+                      child: Container(
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: homeController.selectedCategory == null
-                            ? Container()
-                            : DropdownButton<CategoryModel>(
-                                isExpanded: true,
-                                underline: Container(),
-                                value: homeController.selectedCategory,
-                                onChanged: (x) {
-                                  homeController.selectCategory(x);
-                                },
-                                items: homeController.categoryModels.isEmpty
-                                    ? null
-                                    : homeController.categoryModels.map((e) {
-                                        return DropdownMenuItem<CategoryModel>(
-                                          child: Text(
-                                            e.name,
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ),
-                                          value: e,
-                                        );
-                                      }).toList(),
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(100)),
+                        height: 200,
+                        width: 200,
+                        child: controller.file == null
+                            ? ClipOval(
+                                child: Image(
+                                  image: AssetImage(
+                                    "assets/images/empty.jpg",
+                                  ),
+                                  width: 200,
+                                  height: 200,
+                                  fit: BoxFit.fill,
+                                ),
+                              )
+                            : ClipOval(
+                                child: Image.file(
+                                  controller.file,
+                                  fit: BoxFit.fill,
+                                  width: 200,
+                                  height: 200,
+                                ),
                               ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomTextField('name', controller.nameController),
+                    CustomTextField(
+                        'description', controller.descriptionController),
+                    CustomTextField('color', controller.colorController),
+                    CustomTextField('size', controller.sizeController),
+                    CustomTextField('price', controller.priceController),
+                    CustomTextField('brand', controller.brandController),
+                    GetBuilder<HomeViewModel>(
+                      init: _homeViewModel,
+                      builder: (homeController) =>
+                          homeController.categoryModels == null
+                              ? Container()
+                              : Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: homeController.selectedCategory == null
+                                      ? Container()
+                                      : DropdownButton<CategoryModel>(
+                                          isExpanded: true,
+                                          underline: Container(),
+                                          value:
+                                              homeController.selectedCategory,
+                                          onChanged: (x) {
+                                            homeController.selectCategory(x);
+                                          },
+                                          items: homeController
+                                                  .categoryModels.isEmpty
+                                              ? null
+                                              : homeController.categoryModels
+                                                  .map((e) {
+                                                  return DropdownMenuItem<
+                                                      CategoryModel>(
+                                                    child: Text(
+                                                      e.name,
+                                                      style: TextStyle(
+                                                          color: Colors.black),
+                                                    ),
+                                                    value: e,
+                                                  );
+                                                }).toList(),
+                                        ),
+                                ),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
       ),
     );
   }

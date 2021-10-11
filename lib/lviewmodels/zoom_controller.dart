@@ -38,8 +38,10 @@ class ZoomController extends GetxController {
         break;
       case 2:
         _currentScreen = OrderMainScreen();
-        drawerController.close();
         Get.find<AdminOrderViewModel>().getAllNewOrders();
+        Get.find<AdminOrderViewModel>().getAllDoneOrders();
+        drawerController.close();
+
         break;
       case 3:
         _currentScreen = AddressManagementScreen();

@@ -11,136 +11,158 @@ import 'package:get/get.dart';
 class NewOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AuthViewModel _authViewModel = Get.find<AuthViewModel>();
-    final CheckOutViewModel _checkOutViewModel = Get.find<CheckOutViewModel>();
-
     return GetBuilder<AdminOrderViewModel>(
       init: Get.find<AdminOrderViewModel>(),
-      builder: (controller) => controller.loading == ValueNotifier(true)
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Scaffold(
-              body: ListView.separated(
-                  itemBuilder: (ctx, orderIndex) {
-                    return Container(
-                      height: 420,
-                      padding: EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            trailing: IconButton(
-                              onPressed: () {
-                                controller.orderIsDone(
-                                    controller.newOrders[orderIndex]);
-                              },
-                              icon: Icon(
-                                Icons.check,
-                                size: 30,
-                                color: Colors.red,
-                              ),
-                            ),
-                            title: RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(text: 'Total Price: '),
-                                  TextSpan(
-                                    text:
-                                        '\$${controller.newOrders[orderIndex].totalPrice}',
-                                    style: new TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: primaryColor,
-                                      fontSize: 24,
-                                    ),
+      builder: (controller) => Scaffold(
+          body: controller.newOrders.length == 0
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomText(
+                          text: 'No Orders Found',
+                          fontSize: 30,
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              : controller.loading.value
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircularProgressIndicator(),
+                          ],
+                        ),
+                      ],
+                    )
+                  : ListView.separated(
+                      itemBuilder: (ctx, orderIndex) {
+                        return Container(
+                          height: 420,
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    controller.orderIsDone(
+                                        controller.newOrders[orderIndex]);
+                                  },
+                                  icon: Icon(
+                                    Icons.check,
+                                    size: 30,
+                                    color: Colors.red,
                                   ),
-                                ],
-                              ),
-                            ),
-                            subtitle: RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
                                 ),
-                                children: <TextSpan>[
-                                  TextSpan(text: 'Address: '),
-                                  TextSpan(
-                                    text:
-                                        '${_checkOutViewModel.street + ', ' + _checkOutViewModel.buildingNumber + ', ' + _authViewModel.selectedCity.name + ', ' + _authViewModel.selectedNeighborhood} ',
-                                    style: new TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey,
-                                      fontSize: 24,
+                                title: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.black,
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 250,
-                            child: ListView.separated(
-                              itemCount: controller
-                                  .newOrders[orderIndex].products.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: 150,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        width: 150,
-                                        height: 180,
-                                        child: Image.network(
-                                          controller.newOrders[orderIndex]
-                                              .products[index].image,
-                                          fit: BoxFit.fitWidth,
+                                    children: <TextSpan>[
+                                      TextSpan(text: 'Total Price: '),
+                                      TextSpan(
+                                        text:
+                                            '\$${controller.newOrders[orderIndex].totalPrice}',
+                                        style: new TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: primaryColor,
+                                          fontSize: 24,
                                         ),
-                                      ),
-                                      SizedBox(height: 10),
-                                      RichText(
-                                        maxLines: 1,
-                                        textAlign: TextAlign.start,
-                                        overflow: TextOverflow.ellipsis,
-                                        text: TextSpan(
-                                          text: controller.newOrders[orderIndex]
-                                              .products[index].name,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                      SizedBox(height: 10),
-                                      CustomText(
-                                        text: '\$' +
-                                            controller.newOrders[orderIndex]
-                                                .products[index].price,
-                                        color: primaryColor,
                                       ),
                                     ],
                                   ),
-                                );
-                              },
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(width: 20),
-                            ),
+                                ),
+                                subtitle: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.black,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(text: 'Address: '),
+                                      TextSpan(
+                                        text:
+                                            '${controller.newOrders[orderIndex].address.street + ', ' + controller.newOrders[orderIndex].address.buildingNumber + ', ' + controller.newOrders[orderIndex].address.city + ', ' + controller.newOrders[orderIndex].address.neighborhood} ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: 250,
+                                child: ListView.separated(
+                                  itemCount: controller
+                                      .newOrders[orderIndex].products.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      width: 150,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            width: 150,
+                                            height: 180,
+                                            child: Image.network(
+                                              controller.newOrders[orderIndex]
+                                                  .products[index].image,
+                                              fit: BoxFit.fitWidth,
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          RichText(
+                                            maxLines: 1,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                            text: TextSpan(
+                                              text: controller
+                                                  .newOrders[orderIndex]
+                                                  .products[index]
+                                                  .name,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20),
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          CustomText(
+                                            text: '\$' +
+                                                controller.newOrders[orderIndex]
+                                                    .products[index].price,
+                                            color: primaryColor,
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(width: 20),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (ctx, index) => Divider(
-                        thickness: 2,
-                        color: Colors.white60,
-                        height: 30,
-                      ),
-                  itemCount: controller.newOrders.length)),
+                        );
+                      },
+                      separatorBuilder: (ctx, index) => Divider(
+                            thickness: 3,
+                            color: primaryColor,
+                            height: 30,
+                          ),
+                      itemCount: controller.newOrders.length)),
     );
   }
 }

@@ -34,26 +34,31 @@ class CategoryScreen extends StatelessWidget {
               },
             ),
           ),
-          body: controller.loading.value
+          body: controller.productCategoryModels.isEmpty
               ? Center(
-                  child: CircularProgressIndicator(),
+                  child: Text('This Category does not have products yet'),
                 )
-              : Padding(
-                  padding: EdgeInsets.only(top: 30, right: 18, left: 18),
-                  child: Column(
-                    children: [
-                      Flexible(
-                        child: controller.productCategoryModels.length == 0
-                            ? Center(
-                                child: Text('no products'),
-                              )
-                            : CustomGridView(
-                                productsList: controller.productCategoryModels,
-                              ),
-                      )
-                    ],
-                  ),
-                )),
+              : controller.loading.value
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Padding(
+                      padding: EdgeInsets.only(top: 30, right: 18, left: 18),
+                      child: Column(
+                        children: [
+                          Flexible(
+                            child: controller.productCategoryModels.length == 0
+                                ? Center(
+                                    child: Text('no products'),
+                                  )
+                                : CustomGridView(
+                                    productsList:
+                                        controller.productCategoryModels,
+                                  ),
+                          )
+                        ],
+                      ),
+                    )),
     );
   }
 }

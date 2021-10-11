@@ -10,7 +10,7 @@ class EditCategoryScreen extends StatelessWidget {
       init: Get.find<HomeViewModel>(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          title: Text('Editing Product'),
+          title: Text('Editing Category'),
           actions: [
             IconButton(
               onPressed: () {

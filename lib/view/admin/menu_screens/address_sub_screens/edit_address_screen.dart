@@ -28,7 +28,11 @@ class EditAddressScreen extends StatelessWidget {
               onPressed: () {
                 controller.editAddressInFireStore();
               },
-              icon: Icon(Icons.done),
+              icon: Icon(
+                Icons.done,
+                size: 30,
+                color: Colors.white,
+              ),
             ),
           ],
         ),

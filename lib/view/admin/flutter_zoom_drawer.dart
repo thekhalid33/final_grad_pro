@@ -24,7 +24,7 @@ class _FlutterZoomDrawerState extends State<FlutterZoomDrawer> {
           mainScreen: controller.currentScreen,
           borderRadius: 24.0,
           showShadow: true,
-          angle: -10.0,
+          angle: -5.0,
           backgroundColor: Colors.grey.shade300,
           slideWidth: MediaQuery.of(context).size.width * 0.6,
           openCurve: Curves.fastOutSlowIn,

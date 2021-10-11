@@ -7,8 +7,7 @@ import 'package:get/get.dart';
 class OrderHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-      GetBuilder<OrderViewModel>(
+    return GetBuilder<OrderViewModel>(
       init: Get.find<OrderViewModel>(),
       builder: (controller) => SafeArea(
         child: Scaffold(
@@ -128,8 +127,8 @@ class OrderHistory extends StatelessWidget {
                   );
                 },
                 separatorBuilder: (ctx, index) => Divider(
-                      thickness: 2,
-                      color: Colors.white60,
+                      thickness: 3,
+                      color: primaryColor,
                       height: 30,
                     ),
                 itemCount: controller.orders.length),

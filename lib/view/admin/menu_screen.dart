@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthViewModel _authViewModel = Get.find<AuthViewModel>();
     return Scaffold(
       backgroundColor: primaryColor,
       body: SafeArea(
@@ -19,19 +20,42 @@ class MenuScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      //TODO add osama
-                      // CircleAvatar(
-                      //   backgroundImage: NetworkImage(''),
-                      //   maxRadius: 40,
-                      // ),
-                      SizedBox(height: 12),
-                      Text(
-                        'Khalid EL-ijla',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                        ),
+                      CircleAvatar(
+                        backgroundImage: _authViewModel.user.imageUrl.isNotEmpty
+                            ? NetworkImage(_authViewModel.user.imageUrl)
+                            : ClipOval(
+                                child: Image(
+                                  image: AssetImage(
+                                    "assets/images/empty.jpg",
+                                  ),
+                                  width: 200,
+                                  height: 200,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                        maxRadius: 47,
                       ),
+                      SizedBox(height: 12),
+                      if (_authViewModel.user.id
+                              .compareTo('z8UktWh4KSTrhh5LbNojma9LFIp2') ==
+                          0)
+                        Text(
+                          'Khalid EL-ijla',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      if (_authViewModel.user.id
+                              .compareTo('tysJdb582iYpIpbQz6drBNWsyp33') ==
+                          0)
+                        Text(
+                          'Osama Abu Dahy',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
                     ],
                   ),
                 ],
@@ -65,7 +89,10 @@ final List<Widget> menuItems = [
             color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Home',style: TextStyle(color: Colors.white),),
+          Text(
+            'Home',
+            style: TextStyle(color: Colors.white),
+          ),
         ],
       ),
     ),
@@ -84,11 +111,11 @@ final List<Widget> menuItems = [
       child: Row(
         children: <Widget>[
           Icon(
-            Icons.edit_sharp,
+            Icons.format_list_bulleted,
             color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Products Management',style: TextStyle(color: Colors.white)),
+          Text('Products Management', style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -111,7 +138,7 @@ final List<Widget> menuItems = [
             color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Orders Management',style: TextStyle(color: Colors.white)),
+          Text('Orders Management', style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -134,7 +161,7 @@ final List<Widget> menuItems = [
             color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Address Management',style: TextStyle(color: Colors.white)),
+          Text('Address Management', style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -157,7 +184,7 @@ final List<Widget> menuItems = [
             color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Categories Management',style: TextStyle(color: Colors.white)),
+          Text('Categories Management', style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -175,13 +202,12 @@ final List<Widget> menuItems = [
       },
       child: Row(
         children: <Widget>[
-
           Icon(
             Icons.settings,
             color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Customers Management',style: TextStyle(color: Colors.white)),
+          Text('Customers Management', style: TextStyle(color: Colors.white)),
         ],
       ),
     ),
@@ -204,7 +230,7 @@ final List<Widget> menuItems = [
             color: Colors.white,
           ),
           SizedBox(width: 20),
-          Text('Logout',style: TextStyle(color: Colors.white)),
+          Text('Logout', style: TextStyle(color: Colors.white)),
         ],
       ),
     ),

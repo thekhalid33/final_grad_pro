@@ -26,7 +26,6 @@ class ProfileViewModel extends GetxController {
 
   getCurrentUser() async {
     _loading.value = true;
-    // _userModer = await _localStorageData.getUser;
     _loading.value = false;
     update();
   }

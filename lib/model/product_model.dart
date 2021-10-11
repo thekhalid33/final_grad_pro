@@ -1,4 +1,5 @@
 import 'package:admin_grad_pro/utils/extenstion.dart';
+import 'package:admin_grad_pro/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 
 class ProductModel {
@@ -33,7 +34,7 @@ class ProductModel {
       name: map['name'],
       image: map['image'],
       description: map['description'],
-      // color: HexColor.fromHex(map['colorString']),
+      color: HexColor.fromHex(map['colorString']),
       size: map['size'],
       price: map['price'],
       brand: map['brand'],

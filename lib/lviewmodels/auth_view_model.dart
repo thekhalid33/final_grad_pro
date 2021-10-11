@@ -21,6 +21,7 @@ import 'package:get/get.dart';
 class AuthViewModel extends GetxController {
   AuthViewModel() {
     getCitiesFromFireStore();
+    getUserFromFireStore();
   }
 
   final CartViewModel _cartViewModel = Get.put(CartViewModel());
@@ -234,17 +235,10 @@ class AuthViewModel extends GetxController {
           id: wantToEditModel.id,
           name: cityName,
           neighborhoods: addingNeighborhoods);
-      Get.defaultDialog(
-          title: 'Successful',
-          titleStyle: TextStyle(fontSize: 25),
-          middleText: 'The Address was added successfully',
-          middleTextStyle: TextStyle(fontSize: 20),
-          textConfirm: 'OK',
-          onConfirm: () {
-            getCitiesFromFireStore();
-            addingNeighborhoods = [];
-            Get.back();
-          });
+      getCitiesFromFireStore();
+      addingNeighborhoods = [];
+      Get.back();
+      Get.snackbar('Successful', 'The Address was added successfully');
     } else {
       Get.defaultDialog(
           title: 'Error',
@@ -256,6 +250,7 @@ class AuthViewModel extends GetxController {
             Get.back();
           });
     }
+
     update();
   }
 
@@ -306,7 +301,8 @@ class AuthViewModel extends GetxController {
     if (isLoggedIn) {
       this.myId = AuthHelper.authHelper.getUserId();
       //TODO: 2 add osama
-      if (this.myId == 'z8UktWh4KSTrhh5LbNojma9LFIp2' || this.myId == 'tysJdb582iYpIpbQz6drBNWsyp33' ){
+      if (this.myId == 'z8UktWh4KSTrhh5LbNojma9LFIp2' ||
+          this.myId == 'tysJdb582iYpIpbQz6drBNWsyp33') {
         Get.offAll(() => FlutterZoomDrawer());
       } else {
         Get.offAll(() => ControlView());
@@ -319,6 +315,7 @@ class AuthViewModel extends GetxController {
   UserModel user;
   getUserFromFireStore() async {
     String userId = AuthHelper.authHelper.getUserId();
+    print(userId);
     user = await FireStoreHelper.fireStoreHelper.getUserFromFireStore(userId);
     update();
   }

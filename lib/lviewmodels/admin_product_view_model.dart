@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:admin_grad_pro/helpers/admin_firestore_helper.dart';
 import 'package:admin_grad_pro/helpers/firestorage_helper.dart';
-import 'package:admin_grad_pro/lviewmodels/cart_view_model.dart';
 import 'package:admin_grad_pro/lviewmodels/home_view_model.dart';
 import 'package:admin_grad_pro/model/category_model.dart';
 import 'package:admin_grad_pro/model/product_model.dart';
@@ -31,6 +30,7 @@ class AdminProductViewModel extends GetxController {
   get products => _products;
 
   addProductToFireStore({@required CategoryModel categoryModel}) async {
+    _loading.value = true;
     String imageUrl = await FirebaseStorageHelper.firebaseStorageHelper
         .uploadProductsImage(file);
 
@@ -60,27 +60,36 @@ class AdminProductViewModel extends GetxController {
         Get.back();
       },
     );
+    _loading.value = false;
+
     update();
   }
 
   getProductFromFireStore(String productId) async {
+    _loading.value = true;
+
     productToEdit =
-        AdminFireStoreHelper.adminFireStoreHelper.getProduct(productId);
+        await AdminFireStoreHelper.adminFireStoreHelper.getProduct(productId);
+    _loading.value = false;
+
     update();
   }
 
   getAllProducts() async {
+    _loading.value = true;
     _products = [];
     List list =
         await AdminFireStoreHelper.adminFireStoreHelper.getAllProducts();
     for (int i = 0; i < list.length; i++) {
       _products.add(ProductModel.fromJson(list[i].data()));
-      _loading.value = false;
     }
+    _loading.value = false;
     update();
   }
 
   updateProduct({@required CategoryModel categoryModel}) async {
+    _loading.value = true;
+
     String imageUrl;
     if (updatedFile != null) {
       imageUrl = await FirebaseStorageHelper.firebaseStorageHelper
@@ -103,8 +112,10 @@ class AdminProductViewModel extends GetxController {
         productModel: productModel, categoryId: categoryModel.id);
     await getAllProducts();
     await Get.find<HomeViewModel>().getAllProducts();
-    update();
+    _loading.value = false;
     Get.back();
+    Get.snackbar('Editing Product', 'The product was edited successfully');
+    update();
   }
 
   fillControllers(ProductModel productModel) {
@@ -126,11 +137,15 @@ class AdminProductViewModel extends GetxController {
   }
 
   deleteProduct({String categoryId, String productId}) async {
+    _loading.value = true;
+
     await AdminFireStoreHelper.adminFireStoreHelper.deleteProduct(productId);
     await AdminFireStoreHelper.adminFireStoreHelper
         .deleteCollectionProduct(categoryId: categoryId, productId: productId);
     await getAllProducts();
     await Get.find<HomeViewModel>().getAllProducts();
+    _loading.value = false;
+
     update();
   }
 

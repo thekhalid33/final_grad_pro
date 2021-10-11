@@ -96,20 +96,12 @@ class HomeViewModel extends GetxController {
       id: selectedCategory.id,
       image: imageUrl ?? selectedCategory.image,
     );
+    _categoryModels.clear();
+    getCategory();
+    Get.back();
+    Get.snackbar('Editing Category', 'The Category was edited  successfully');
 
-    Get.defaultDialog(
-      title: 'Editing Category ',
-      titleStyle: TextStyle(fontSize: 25),
-      middleText: 'The Category was edited successfully',
-      middleTextStyle: TextStyle(fontSize: 20),
-      radius: 30,
-      textConfirm: 'OK',
-      onConfirm: () {
-        _categoryModels.clear();
-        getCategory();
-        Get.back();
-      },
-    );
+    update();
   }
 
   deleteCategory({@required String id}) async {
