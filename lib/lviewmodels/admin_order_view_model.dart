@@ -1,6 +1,7 @@
 import 'package:admin_grad_pro/helpers/admin_firestore_helper.dart';
 import 'package:admin_grad_pro/model/order_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class AdminOrderViewModel extends GetxController {
@@ -18,6 +19,9 @@ class AdminOrderViewModel extends GetxController {
   get doneOrders => _doneOrders;
 
   getAllNewOrders() async {
+
+    EasyLoading.show(status: 'loading...');
+
     _loading = ValueNotifier<bool>(true);
     _newOrders = [];
     await AdminFireStoreHelper.adminFireStoreHelper
@@ -28,11 +32,16 @@ class AdminOrderViewModel extends GetxController {
           _newOrders.add(OrderModel.fromJson(value.docs[i].data()));
         }
     });
+    EasyLoading.dismiss();
+
     _loading = ValueNotifier<bool>(false);
     update();
   }
 
   getAllDoneOrders() async {
+    EasyLoading.show(status: 'loading...');
+
+
     _loading = ValueNotifier<bool>(true);
     _doneOrders = [];
     await AdminFireStoreHelper.adminFireStoreHelper
@@ -43,6 +52,8 @@ class AdminOrderViewModel extends GetxController {
           _doneOrders.add(OrderModel.fromJson(value.docs[i].data()));
         }
     });
+    EasyLoading.dismiss();
+
     _loading = ValueNotifier<bool>(false);
     update();
   }

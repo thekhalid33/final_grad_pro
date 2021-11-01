@@ -2,6 +2,7 @@ import 'package:admin_grad_pro/splach_screen.dart';
 import 'package:admin_grad_pro/utils/Colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:flutter/services.dart';
 
@@ -19,12 +20,16 @@ class MyApp extends StatelessWidget {
     ]);
 
     return GetMaterialApp(
+      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: primaryColor,
         primarySwatch: Colors.green,
       ),
       home: FirebaseConfiguration(),
+      builder: EasyLoading.init(),
+
     );
   }
 }

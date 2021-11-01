@@ -14,6 +14,7 @@ import 'package:admin_grad_pro/view/auth/auth_main_Screen.dart';
 import 'package:admin_grad_pro/view/widgets/custom_item_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:admin_grad_pro/view/customer/control_view.dart';
 import 'package:get/get.dart';
@@ -302,7 +303,7 @@ class AuthViewModel extends GetxController {
       this.myId = AuthHelper.authHelper.getUserId();
       //TODO: 2 add osama
       if (this.myId == 'z8UktWh4KSTrhh5LbNojma9LFIp2' ||
-          this.myId == 'tysJdb582iYpIpbQz6drBNWsyp33') {
+          this.myId == '8oKV7Rrn8AUALC32K8Z5404dOKj2') {
         Get.offAll(() => FlutterZoomDrawer());
       } else {
         Get.offAll(() => ControlView());
@@ -334,19 +335,29 @@ class AuthViewModel extends GetxController {
     firstNameController.clear();
     lastNameController.clear();
   }
+  ///
+  ///
 
   login() async {
+    EasyLoading.show(status: 'loading...');
+
     UserCredential userCredential = await AuthHelper.authHelper
         .signin(emailController.text, passwordController.text);
     if (userCredential != null) {
       FireStoreHelper.fireStoreHelper
           .getUserFromFireStore(userCredential.user.uid);
+      EasyLoading.dismiss();
+
+
       checkLogin();
       resetControllers();
     }
   }
 
   register() async {
+
+    EasyLoading.show(status: 'loading...');
+
     try {
       UserCredential userCredential = await AuthHelper.authHelper
           .signup(emailController.text, passwordController.text);
@@ -368,9 +379,14 @@ class AuthViewModel extends GetxController {
             .addUserToFireStore(registerRequest);
         await AuthHelper.authHelper.verifyEmail();
         await AuthHelper.authHelper.logout();
+        EasyLoading.dismiss();
+
         tabController.animateTo(1);
+
       }
     } on Exception catch (e) {
+      EasyLoading.dismiss();
+
       // TODO
       Get.defaultDialog(
           title: 'Error',
@@ -380,6 +396,7 @@ class AuthViewModel extends GetxController {
           textConfirm: 'OK',
           onConfirm: () {
             Get.back();
+
           });
     }
     resetControllers();

@@ -6,6 +6,7 @@ import 'package:admin_grad_pro/lviewmodels/home_view_model.dart';
 import 'package:admin_grad_pro/model/category_model.dart';
 import 'package:admin_grad_pro/model/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -30,7 +31,9 @@ class AdminProductViewModel extends GetxController {
   get products => _products;
 
   addProductToFireStore({@required CategoryModel categoryModel}) async {
-    _loading.value = true;
+    // _loading.value = true;
+    EasyLoading.show(status: 'loading...');
+
     String imageUrl = await FirebaseStorageHelper.firebaseStorageHelper
         .uploadProductsImage(file);
 
@@ -60,12 +63,16 @@ class AdminProductViewModel extends GetxController {
         Get.back();
       },
     );
-    _loading.value = false;
+    // _loading.value = false;
+    EasyLoading.dismiss();
+
 
     update();
   }
 
   getProductFromFireStore(String productId) async {
+    // EasyLoading.show(status: 'loading...');
+
     _loading.value = true;
 
     productToEdit =
@@ -76,14 +83,18 @@ class AdminProductViewModel extends GetxController {
   }
 
   getAllProducts() async {
-    _loading.value = true;
+    EasyLoading.show(status: 'loading...');
+
+    // _loading.value = true;
     _products = [];
     List list =
         await AdminFireStoreHelper.adminFireStoreHelper.getAllProducts();
     for (int i = 0; i < list.length; i++) {
       _products.add(ProductModel.fromJson(list[i].data()));
     }
-    _loading.value = false;
+    EasyLoading.dismiss();
+
+    // _loading.value = false;
     update();
   }
 

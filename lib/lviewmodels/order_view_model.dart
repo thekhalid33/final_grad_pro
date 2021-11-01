@@ -4,6 +4,7 @@ import 'package:admin_grad_pro/lviewmodels/cart_view_model.dart';
 import 'package:admin_grad_pro/lviewmodels/checkOut_view_model.dart';
 import 'package:admin_grad_pro/model/order_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class OrderViewModel extends GetxController {
@@ -47,12 +48,17 @@ class OrderViewModel extends GetxController {
   }
 
   getAllOrders() async {
+
+    EasyLoading.show(status: "loading...");
+
     await FireStoreOrderHelper.fireStoreOrderHelper
         .getUserOrdersFromFireStore(_firebaseAuth.currentUser.uid)
         .then((value) {
       for (int i = 0; i < value.docs.length; i++) {
         _orders.add(OrderModel.fromJson(value.docs[i].data()));
       }
+      EasyLoading.dismiss();
+
     });
     update();
   }

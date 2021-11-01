@@ -6,6 +6,7 @@ import 'package:admin_grad_pro/helpers/home_helper.dart';
 import 'package:admin_grad_pro/model/category_model.dart';
 import 'package:admin_grad_pro/model/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -46,6 +47,8 @@ class HomeViewModel extends GetxController {
   }
 
   getAllProducts() async {
+    // EasyLoading.show();
+
     _loading.value = true;
     _productModels = [];
     await HomeHelper.homeHelper.getAllProducts().then((value) {
@@ -58,6 +61,9 @@ class HomeViewModel extends GetxController {
   }
 
   addCategoryToFireStore() async {
+
+    EasyLoading.show(status: 'loading...');
+
     String imageUrl = await FirebaseStorageHelper.firebaseStorageHelper
         .uploadCategoryImage(file);
 
@@ -66,6 +72,7 @@ class HomeViewModel extends GetxController {
       //TODO: add image backup
       image: imageUrl,
     );
+    EasyLoading.dismiss();
 
     Get.defaultDialog(
       title: 'Category added to firebase',
@@ -80,6 +87,7 @@ class HomeViewModel extends GetxController {
         _categoryModels.clear();
         getCategory();
         Get.back();
+
       },
     );
   }

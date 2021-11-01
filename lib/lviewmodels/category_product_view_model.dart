@@ -1,5 +1,6 @@
 import 'package:admin_grad_pro/model/product_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,9 @@ class CategoryProductViewModel extends GetxController {
   }
 
   getCategoryProducts(String id) async {
+
+    EasyLoading.show(status: 'loading...');
+
     _loading.value = true;
     QuerySnapshot<Map<String, dynamic>> value = await _firebaseFireStore
         .collection('Categories')
@@ -28,6 +32,8 @@ class CategoryProductViewModel extends GetxController {
     for (int i = 0; i < value.docs.length; i++) {
       _productCategoryModels.add(ProductModel.fromJson(value.docs[i].data()));
       _loading.value = false;
+      EasyLoading.dismiss();
+
     }
 
     update();

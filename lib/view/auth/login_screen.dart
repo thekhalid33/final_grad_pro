@@ -12,32 +12,34 @@ class LoginScreen extends StatelessWidget {
     return GetBuilder<AuthViewModel>(
       init: Get.find<AuthViewModel>(),
       builder: (controller) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
 
-            SizedBox(height: 20,),
-            CustomTextField('Email', controller.emailController),
-            CustomTextField('Password', controller.passwordController),
-            CustomButton(function: controller.login, label: 'Login'),
-            GestureDetector(
-              onTap: () {
-                Get.to(ResetPasswordScreen());
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Forget Password?',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(color: Colors.black),
+              SizedBox(height: 20,),
+              CustomTextField('Email', controller.emailController),
+              CustomTextField('Password', controller.passwordController),
+              CustomButton(function: controller.login, label: 'Login'),
+              GestureDetector(
+                onTap: () {
+                  Get.to(ResetPasswordScreen());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Forget Password?',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

@@ -24,7 +24,12 @@ class AuthHelper {
     try {
       UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
-      return userCredential;
+      if(userCredential.user.emailVerified ){
+        return userCredential ;
+      }else{
+        return null;
+      }
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.defaultDialog(

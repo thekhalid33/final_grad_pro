@@ -47,7 +47,7 @@ class MenuScreen extends StatelessWidget {
                           ),
                         ),
                       if (_authViewModel.user.id
-                              .compareTo('tysJdb582iYpIpbQz6drBNWsyp33') ==
+                              .compareTo('8oKV7Rrn8AUALC32K8Z5404dOKj2') ==
                           0)
                         Text(
                           'Osama Abu Dahy',

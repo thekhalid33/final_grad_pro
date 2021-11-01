@@ -18,7 +18,7 @@ class CustomConstItemWidget extends StatelessWidget {
             text: TextSpan(
               text: label,
               style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: Colors.black),
             ),
@@ -29,7 +29,7 @@ class CustomConstItemWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             text: TextSpan(
               text: value,
-              style: TextStyle(color: Colors.black, fontSize: 22),
+              style: TextStyle(color: Colors.black, fontSize: 16),
             ),
           ),
         ],

@@ -14,18 +14,21 @@ class FavoritesScreen extends StatelessWidget {
       init: Get.find<FavoritesViewModel>(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
+
           title: Text(
             'My Favorites',
-            style: TextStyle(color: Colors.black, fontSize: 25),
+            style: TextStyle(color: Colors.white, fontSize: 25),
+
           ),
           centerTitle: true,
           elevation: 0,
-          backgroundColor: Colors.transparent,
+          // backgroundColor: Colors.transparent,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.black,
+              color: Colors.white,
               size: 30,
+
             ),
             onPressed: () {
               Get.back();
