@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
       ),
       home: FirebaseConfiguration(),
       builder: EasyLoading.init(),
-
     );
   }
 }

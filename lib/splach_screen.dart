@@ -26,12 +26,13 @@ class SplachScreen extends StatelessWidget {
       body: Container(
         // color: primaryColor,
         child: Center(
-          
           child: Container(
-            
             width: MediaQuery.of(context).size.width - 30,
             height: 400,
-            child: SvgPicture.asset("assets/images/splach.svg",fit: BoxFit.cover,),
+            child: SvgPicture.asset(
+              "assets/images/splach.svg",
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
